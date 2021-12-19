@@ -1,18 +1,21 @@
 import { ActionTypes } from '../action-types';
-import { Action, IState } from '../actions';
+import { Action } from '../actions';
 
-const initialState = { books: [] };
+const initialState: { item_id: string; title: string; category: string }[] = [];
 
-const booksReducer = (state: IState = initialState, action: Action) => {
+const booksReducer = (
+  state: { item_id: string; title: string; category: string }[] = initialState,
+  action: Action
+) => {
   switch (action.type) {
     case ActionTypes.ADD_BOOK:
-      return { ...state, books: [state.books, action.payload] };
+      return [...state, action.payload];
     case ActionTypes.REMOVE_BOOK:
-      return state.books.filter(
-        (book) => book.item_id.toString() !== action.payload.toString()
+      return state.filter(
+        (book) => book.item_id && book.item_id !== action.payload
       );
     case ActionTypes.LOAD_BOOKS:
-      return { ...state, books: action.payload };
+      return action.payload;
     default:
       return state;
   }

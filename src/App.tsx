@@ -1,21 +1,25 @@
 import { FC, useEffect } from 'react';
 import './App.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addBook, loadBooks, removeBook } from './redux/action-creators';
+import { State } from './redux/reducers/index';
 
+let i = 0;
 const App: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(
-      addBook({
-        item_id: Date.now().toString(),
-        title: 'Zains Book Title',
-        category: Date.now().toString(),
-      })
-    );
+    i += 1;
+    // dispatch(
+    //   addBook({
+    //     item_id: Date.now().toString(),
+    //     title: `Zains Book Number ${i}`,
+    //     category: `Category ${i}`,
+    //   })
+    // );
     dispatch(loadBooks());
-
   }, []);
+  const books = useSelector((state: State) => state.books);
+  console.log('Books: ', books);
 
   return (
     <div className="App">
