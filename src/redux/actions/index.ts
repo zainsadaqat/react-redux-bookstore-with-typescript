@@ -6,9 +6,6 @@ interface AddBookPayload {
   category: string;
 }
 
-export interface RemoveBookPayload {
-  item_id: string;
-}
 
 interface AddAction {
   type: ActionTypes.ADD_BOOK;
@@ -17,7 +14,7 @@ interface AddAction {
 
 interface RemoveAction {
   type: ActionTypes.REMOVE_BOOK;
-  payload: RemoveBookPayload;
+  payload: string;
 }
 
 interface LoadAction {
